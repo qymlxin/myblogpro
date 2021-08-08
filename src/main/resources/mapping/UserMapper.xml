@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qymlxin.mapper.UserMapper">
+
+    <select id="queryUserById" resultType="User" parameterType="int">
+        select * from vue_blog.v_user where id = #{id}
+    </select>
+
+    <select id="queryUserByName" resultType="User" parameterType="String">
+        select * from vue_blog.v_user where username = #{username};
+    </select>
+
+    <select id="queryAllUser" resultType="User">
+        select * from vue_blog.v_user
+    </select>
+
+    <insert id="addUser" parameterType="User">
+        insert into vue_blog.v_user (username,avatar,email,password,status,created,last_login)
+        values (#{userName},#{avatar},#{email},#{password},#{status},#{created},#{lastLogin});
+    </insert>
+
+    <update id="deleteUserById" parameterType="int">
+        update vue_blog.v_user
+        set status = 0
+        where id = #{id};
+    </update>
+
+<!--    <delete id="deleteUserById" parameterType="int">-->
+<!--        delete from vue_blog.v_user-->
+<!--        where id = #{id};-->
+<!--    </delete>-->
+
+    <update id="updateUser" parameterType="User">
+        update vue_blog.v_user
+        set username = #{username},avatar = #{avatar},email = #{email}, password = #{password}, status = #{status}
+        where id = #{id};
+    </update>
+
+</mapper>

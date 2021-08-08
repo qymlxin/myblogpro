@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qymlxin.mapper.BlogMapper">
+
+    <select id="queryBlogById" parameterType="int" resultType="Blog">
+        select * from vue_blog.v_blog where id = #{id};
+    </select>
+
+    <select id="queryBlogByUserId" parameterType="int" resultType="Blog">
+        select * from vue_blog.v_blog where user_id = #{userid};
+    </select>
+
+    <select id="queryBlogByTitle" parameterType="String" resultType="Blog">
+        select * from vue_blog.v_blog where title like "%"#{title}"%";
+    </select>
+
+    <select id="queryAllBlog" resultType="Blog">
+        select * from vue_blog.v_blog;
+    </select>
+
+    <select id="queryByDesc" resultType="Blog" parameterType="String">
+        select * from vue_blog.v_blog where description like "%"#{keyword}"%";
+    </select>
+
+    <insert id="addBlog" parameterType="Blog">
+        insert into vue_blog.v_blog (user_id, title, description, content, created, status)
+        values (#{userId},#{title},#{description},#{content},#{created},#{status});
+    </insert>
+
+    <update id="updateBlog" parameterType="Blog">
+        update vue_blog.v_blog
+        set title = #{title}, description = #{description}, content = #{content}
+        where id = #{id};
+    </update>
+
+    <update id="deleteBlog" parameterType="int">
+        update vue_blog.v_blog
+        set status = 0
+        where id = #{id};
+    </update>
+
+</mapper>
